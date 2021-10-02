@@ -73,7 +73,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
  
  [http://localhost:3000/registro-ventas](http://localhost:3000/registro-ventas)
  
- [http://localhost:3000//modificar-producto](http://localhost:3000//modificar-producto)
+ [http://localhost:3000/modificar-producto](http://localhost:3000/modificar-producto)
  
  [http://localhost:3000/modificar-venta](http://localhost:3000/modificar-venta)
  
