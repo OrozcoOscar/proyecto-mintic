@@ -69,9 +69,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 ## Routes
- [http://localhost:3000/registro-producto]
- [http://localhost:3000/registro-ventas]
- [http://localhost:3000//modificar-producto]
- [http://localhost:3000/modificar-venta]
- [http://localhost:3000/modificar-cliente]
- [http://localhost:3000/productos]
+ [http://localhost:3000/registro-producto](http://localhost:3000/registro-producto)
+ 
+ [http://localhost:3000/registro-ventas](http://localhost:3000/registro-ventas)
+ 
+ [http://localhost:3000//modificar-producto](http://localhost:3000//modificar-producto)
+ 
+ [http://localhost:3000/modificar-venta](http://localhost:3000/modificar-venta)
+ 
+ [http://localhost:3000/modificar-cliente](http://localhost:3000/modificar-cliente)
+ 
+ [http://localhost:3000/productos](http://localhost:3000/productos)
