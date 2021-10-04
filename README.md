@@ -80,3 +80,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
  [http://localhost:3000/modificar-cliente](http://localhost:3000/modificar-cliente)
  
  [http://localhost:3000/productos](http://localhost:3000/productos)
+
+ [http://localhost:3000/login](http://localhost:3000/login)
+
+ [http://localhost:3000/singup](http://localhost:3000/singup)
