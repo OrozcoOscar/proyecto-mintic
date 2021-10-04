@@ -1,7 +1,12 @@
 import React from "react";
+import Menu from './Menu';
 
 function MainRp(props){
+    const vBotones = [{nombre:"Home",ruta:"#"},{nombre:"Name",ruta:"#"},{nombre:"Log out",ruta:"/login"}]
     return(
+        <div className="Padre">
+
+        <Menu botones={vBotones}/>
         <div className="container cent py-5">
             <h1>REGISTRO DE PRODUCTOS</h1>
 
@@ -26,7 +31,7 @@ function MainRp(props){
             </form>
             
         </div>
-        
+    </div>    
     );
 }
 

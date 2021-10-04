@@ -1,6 +1,8 @@
 
 import './App.css';
-import Menu from './components/Menu';
+// import Menu from './components/Menu';
+// import Menu2 from './components/Menu2';
+
 
 import MainRp from './components/MainRp';
 import MainRv from './components/MainRv';
@@ -11,8 +13,12 @@ import MainMv from './components/MainMv';
 import MainMc from './components/MainMc';
 
 import MainP from './components/MainP';
+import MainAdmin from './components/MainAdmin';
 
-import Footer from './components/Footer';
+import Login from './components/Login';
+import Singup from './components/Singup';
+
+// import Footer from './components/Footer';
 
 import {
   BrowserRouter as Router,
@@ -21,11 +27,11 @@ import {
 } from "react-router-dom";
 
 
+
 function App() {
   return (
     <Router>
       <div className="App">
-        <Menu/>
         <Switch>
           <Route path="/registro-producto">
             <MainRp/>
@@ -36,6 +42,12 @@ function App() {
           <Route path="/modificar-producto">
             <MainMp/>
           </Route>
+          <Route path="/login">
+            <Login/>
+          </Route> 
+          <Route path="/singup">
+            <Singup/>
+          </Route> 
           <Route path="/modificar-venta">
             <MainMv/>
           </Route>
@@ -45,8 +57,10 @@ function App() {
           <Route path="/productos">
             <MainP/>
           </Route>
+          <Route path="/admin">
+            <MainAdmin/>
+          </Route>
         </Switch>
-        <Footer/>
       </div>
     </Router>
   );

@@ -1,8 +1,14 @@
 import React from "react";
+import Menu from './Menu';
 
 function MainMp(props){
+    const vBotones = [{nombre:"Home",ruta:"/admin"},{nombre:"Name",ruta:"#"},{nombre:"Log out",ruta:"/login"}]
     return(
+        <div className="Padre">
+
+        <Menu botones={vBotones}/>
         <div className="container cent py-5">
+            
             <h1>PRODUCTOS</h1>
 
             <div className="cent py-5">
@@ -29,29 +35,31 @@ function MainMp(props){
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td><button className="btn btn-success">True</button></td>
+                            <td>20,000</td>
+                            <td>32</td>
+                            <td><button className="btn btn-success">Opciones</button></td>
                             <td><button className="btn btn-secondary">X</button></td>
                         </tr>
                         <tr>
                             <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td><button className="btn btn-success">True</button></td>
+                            <td>40,000</td>
+                            <td>14</td>
+                            <td><button className="btn btn-success">Opciones</button></td>
                             <td><button className="btn btn-secondary">X</button></td>
                         </tr>
                         <tr>
                             <th scope="row">3</th>
-                            <td>Larry the Bird</td>
-                            <td>Thornton</td>
-                            <td><button className="btn btn-success">True</button></td>
+                            <td>25,000</td>
+                            <td>2</td>
+                            <td><button className="btn btn-success">Opciones</button></td>
                             <td><button className="btn btn-secondary">X</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        </div>
+        
     );
 }
 

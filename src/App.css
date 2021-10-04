@@ -72,7 +72,30 @@
 .btn{
   border: 1px solid black !important;
 }
-
+.contenedor{
+  width: 50%;
+  margin-right: 10rem;
+  height: 2rem;
+  font-size: 10em;
+}
+.contenedor2{
+  width: 40%;
+  margin-right: 10rem;
+  height: 2rem;
+  font-size: 10em;
+}
+.siderbar{
+  width: 50%;
+  height: 15rem;
+}
+.line{
+  border-left: 6px solid grey;
+  height: 15rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -4px;
+  
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
