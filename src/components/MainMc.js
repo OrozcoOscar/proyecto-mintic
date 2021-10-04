@@ -1,14 +1,30 @@
 import React from "react";
 import Menu from './Menu';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
+import { useState } from 'react';
 
 function MainMc(props){
     const vBotones = [{nombre:"Home",ruta:"/admin"},{nombre:"Name",ruta:"#"},{nombre:"Log out",ruta:"/login"}]
+
+    const [dropdown,setDropdown] = useState(false);
+    const [dropdown1,setDropdown1] = useState(false);
+    const [dropdown2,setDropdown2] = useState(false);
+    
+    const abrirCerrarDropdown=()=>{
+        setDropdown(!dropdown);
+    }
+    const abrirCerrarDropdown1=()=>{
+        setDropdown1(!dropdown1);
+    }
+    const abrirCerrarDropdown2=()=>{
+        setDropdown2(!dropdown2);
+    }
     return(
         
         <div>
         <Menu botones={vBotones}/>
         <div className="container cent py-5">
-        <h1>Usuarios</h1>
+        <h1>USUARIOS</h1>
         
         <div className="cent py-5">
             <div className="container-fluid">
@@ -36,7 +52,20 @@ function MainMc(props){
                         <th scope="row">1</th>
                         <td>Mark</td>
                         <td>dd/mm/aaaa</td>
-                        <td><button className="btn btn-secondary">True</button></td>
+                        <td>
+                        <Dropdown isOpen={dropdown} toggle={abrirCerrarDropdown}>
+                                    <DropdownToggle>
+                                        Opciones
+                                    </DropdownToggle>
+
+                                    <DropdownMenu>
+                                        <DropdownItem>Accion1</DropdownItem>
+                                        <DropdownItem>Accion1</DropdownItem>
+                                        <DropdownItem>Accion1</DropdownItem>
+                                    </DropdownMenu>
+                                    
+                                </Dropdown>
+                        </td>
                         <td>
                             <button className="btn btn-success mx-1">X</button>
                             <button class="btn btn-danger mx-1">O</button>
@@ -46,7 +75,20 @@ function MainMc(props){
                         <th scope="row">2</th>
                         <td>Jacob</td>
                         <td>dd/mm/aaaa</td>
-                        <td><button className="btn btn-secondary">True</button></td>
+                        <td>
+                        <Dropdown isOpen={dropdown1} toggle={abrirCerrarDropdown1}>
+                                    <DropdownToggle>
+                                        Opciones
+                                    </DropdownToggle>
+
+                                    <DropdownMenu>
+                                        <DropdownItem>Accion1</DropdownItem>
+                                        <DropdownItem>Accion1</DropdownItem>
+                                        <DropdownItem>Accion1</DropdownItem>
+                                    </DropdownMenu>
+                                    
+                                </Dropdown>
+                        </td>
                         <td>
                             <button className="btn btn-success mx-1">X</button>
                             <button class="btn btn-danger mx-1">O</button>
@@ -56,7 +98,20 @@ function MainMc(props){
                         <th scope="row">3</th>
                         <td>Larry the Bird</td>
                         <td>dd/mm/aaaa</td>
-                        <td><button className="btn btn-secondary">True</button></td>
+                        <td>
+                        <Dropdown isOpen={dropdown2} toggle={abrirCerrarDropdown2}>
+                                    <DropdownToggle>
+                                        Opciones
+                                    </DropdownToggle>
+
+                                    <DropdownMenu>
+                                        <DropdownItem>Accion1</DropdownItem>
+                                        <DropdownItem>Accion1</DropdownItem>
+                                        <DropdownItem>Accion1</DropdownItem>
+                                    </DropdownMenu>
+                                    
+                                </Dropdown>
+                        </td>
                         <td>
                             <button className="btn btn-success mx-1">X</button>
                             <button class="btn btn-danger mx-1">O</button>
