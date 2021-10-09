@@ -1,0 +1,26 @@
+{
+    "_id" : ObjectId("6161eaef42498440b3fac0ba"),
+    "rol" : 2,
+    "token" : "nzm1wmtt2ev9f4pgmli1e4w4opzdlc7a16pu16o9wie0vtuk6mll08x83dc9vjx38bjt0qmdvne52lvfym08wvj1z1w99c4ao4j7uolqmg9l",
+    "name" : "oscar",
+    "email" : "oscar@hotmail.com",
+    "__v" : 0
+}
+
+{
+    "_id" : ObjectId("6161eb0942498440b3fac0bc"),
+    "rol" : 0,
+    "token" : "90kdidpxxe57qrk2ie0vk4s5llyh6p21w3huubw7komg6ung0hizb62ovtb5t7zlu5abazs3w2aa4vnw9qlwxu75d9qkbrbpev11oy6cwl1",
+    "name" : "douglas",
+    "email" : "douglas@hotmail.com",
+    "__v" : 0
+}
+
+{
+    "_id" : ObjectId("61620738f3f42eb58d40a022"),
+    "rol" : 1,
+    "token" : "jmrtx9fd6nad3cg4sox8wr8bx86wefzith27p8l3u2g9jcm3f3lqkvd108htecu2o8slxs4aq6irj9bmflfol9b06zq0310smphhf8c7ajt",
+    "name" : "guardo",
+    "email" : "guardo@gmail.com",
+    "__v" : 0
+}
