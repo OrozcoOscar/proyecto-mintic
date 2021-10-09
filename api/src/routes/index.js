@@ -27,9 +27,11 @@ router.post('/log', async (req, res) => {//login
         } else {
             let token=Token(10)
             u.update({token}, () => {
-                res.json({ est: 200,token});
+                u.token=token
+                res.json({ est: 200,user:u});
             });      
         }
+        
 
     })
 })
@@ -42,7 +44,11 @@ router.post('/reg',(req, res) => {//signUp
     userDB.email = email;
     ///////////////////////////
     userDB.save(err => {
-        if (err) res.json({ est: err.code });
+        if (err){
+            if(err.code==11000){
+                res.json({ est: err.code,msg:"Ya hay una cuenta con ese correo"});
+            }
+        }
         else res.json({ est: 200 });
     });
 })

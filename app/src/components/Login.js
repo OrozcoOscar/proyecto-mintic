@@ -1,15 +1,39 @@
 import React,{useState,useEffect} from "react";
 import Menu from './Menu';
-import {signIn} from './requestAPI';
+import {signIn,validToken} from './requestAPI';
 
 export default function Login(props){
     const vBotones = [{nombre:"Home",ruta:"#"},{nombre:"Log in",ruta:"/login"},{nombre:"Sing up",ruta:"/singup"}]
     const [email, setEmail] = useState("")
+    useEffect(() => {
+        let token=window.Get().t
+        if(token){
+            validToken({token},(e)=>{
+                if(e.est==200){
+                    if( e.user.rol==1){
+                        window.location = '/ventas?t='+token;
+                    }else if(e.user.rol==2){
+                        window.location = '/admin?t='+token;
+                    }
+                }
+            })
+        }else{
+            window.location="/login"
+        }
+    }, [])
     function go(){
     console.log(email)
      signIn({email},(e)=>{
          if(e.est==200){
-            window.location = '/admin?t='+e.token;
+            if(e.user.rol==0){
+                alert("Tu cuenta no ha sido activada,comunicate con el administrador")
+            }else if(e.user.rol==1){
+                window.location = '/ventas?t='+e.user.token;
+            }else{
+                window.location = '/admin?t='+e.user.token;
+            }
+         }else{
+            alert(e.msg)
          }
      })
     }

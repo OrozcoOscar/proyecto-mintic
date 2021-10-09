@@ -2,18 +2,33 @@ import React, { useState, useEffect } from 'react';
 import Menu from './Menu';
 import {getVentas} from './requestAPI';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
+import {validToken} from './requestAPI';
 
-
-function MainMv(props){
-    const vBotones = [{nombre:"Home",ruta:"/admin"},{nombre:"Name",ruta:"#"},{nombre:"Log out",ruta:"/login"}]
+function Ventas(props){
+     const [user, setUser] = useState({name:""})
+    const vBotones = [{nombre:"Home",ruta:"/ventas"},{nombre:"Name",ruta:"#"},{nombre:"Log out",ruta:"/login"}]
 
     const [ventas,setVentas] = useState([]);
-    
     useEffect(() => {
-        getVentas({},(e)=>{
-            setVentas(e)
-        })
-        
+        let token=window.Get().t
+        if(token){
+            validToken({token},(e)=>{
+                if(e.est!=200){
+                     window.location="/"
+                }else if( e.user.rol==1 || e.user.rol==2){
+                    user.name=e.user.name
+                    setUser({...user})
+                    getVentas({},(e)=>{
+                        setVentas(e)
+                    })
+                }else{
+                    alert("No tienes los permisos necesarios")
+                    window.location="/?t="+token
+                }
+            })
+        }else{
+            window.location="/"
+        }
     }, [])
     function updateEst(i){
         if(ventas[i].estOpc){
@@ -93,4 +108,4 @@ function MainMv(props){
     
 }
 
-export default MainMv;
+export default Ventas;

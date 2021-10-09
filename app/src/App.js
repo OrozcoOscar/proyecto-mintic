@@ -58,7 +58,7 @@ function App() {
             <MainAdmin/>
           </Route>
           <Route path="/">
-          <Reg/>
+          <Login/>
           </Route>
         </Switch>
       </div>

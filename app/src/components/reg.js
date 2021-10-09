@@ -13,7 +13,11 @@ export default function Reg(props){
    function go(){
        console.log(data)
     signUp(data,(e)=>{
-        console.log(e)
+        if(e.est==200){
+            window.location="/"
+        }else{
+            alert(e.msg)
+        }
     })
    }
     return(

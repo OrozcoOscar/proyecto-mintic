@@ -2,21 +2,25 @@ import React,{useState,useEffect} from "react";
 import Menu from './Menu';
 import {validToken} from './requestAPI';
 function MainAdmin(props){
+     const [user, setUser] = useState({name:""})
     const vBotones = [{nombre:"Home",ruta:"#"},{nombre:"Name",ruta:"#"},{nombre:"Log out",ruta:"/login"}]
-    const [user, setUser] = useState({name:""})
+   
     useEffect(() => {
         let token=window.Get().t
         if(token){
             validToken({token},(e)=>{
                 if(e.est!=200){
-                    window.location="/login"
-                }else{
+                     window.location="/"
+                }else if(e.user.rol==2){
                     user.name=e.user.name
                     setUser({...user})
+                }else{
+                    alert("No tienes los permisos necesarios")
+                    window.location="/?t="+token
                 }
             })
         }else{
-            window.location="/login"
+            window.location="/"
         }
     }, [])
     
