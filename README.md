@@ -71,16 +71,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## Routes
  [http://localhost:3000/registro-producto](http://localhost:3000/registro-producto)
  
- [http://localhost:3000/registro-ventas](http://localhost:3000/registro-ventas)
+ [http://localhost:3000/registro-venta](http://localhost:3000/registro-venta)
  
- [http://localhost:3000/modificar-producto](http://localhost:3000/modificar-producto)
+ [http://localhost:3000/modificar-productos](http://localhost:3000/modificar-productos)
  
- [http://localhost:3000/modificar-venta](http://localhost:3000/modificar-venta)
+ [http://localhost:3000/ventas](http://localhost:3000/ventas)
  
- [http://localhost:3000/modificar-cliente](http://localhost:3000/modificar-cliente)
+ [http://localhost:3000/admin](http://localhost:3000/admin)
+ 
+ [http://localhost:3000/usuarios](http://localhost:3000/usuarios)
  
  [http://localhost:3000/productos](http://localhost:3000/productos)
 
  [http://localhost:3000/login](http://localhost:3000/login)
 
  [http://localhost:3000/singup](http://localhost:3000/singup)
+
+ 
