@@ -65,6 +65,77 @@ router.post('/validToken',(req, res) => {//validar sesion
                    
                 })
 })
+router.post('/users', async (req, res) =>{
+    const { token } = req.body;
+    User.findOne({token}, async (err, u) => {
+                    if (err) {
+                        res.json({ est: err.code, msg: "Algo salio mal,intentalo de nuevo mas tarde" });
+                    } else if (!u) {
+                        res.json({ est: 404, msg: "No se encuentra ese usuario" });
+                    }  else {
+                       if(u.rol==2){
+                            let users =await User.find({email:{ $ne:u.email}},{email:0,token:0})
+                            users=users.map(u=>{return {...u._doc,estOpc:false}})
+                            res.json({est: 200, users})
+                       }else{
+                            res.json({est: 403 , msg: "403 Forbidden(No tienes los permisos suficientes)" })
+                       }
+                        
+                    }
+                   
+                })
+})
+router.post('/logout', async (req, res) =>{
+    const { token } = req.body;
+    User.findOne({token}, async (err, u) => {
+                    if (err) {
+                        res.json({ est: err.code, msg: "Algo salio mal,intentalo de nuevo mas tarde" });
+                    } else if (!u) {
+                        res.json({ est: 404, msg: "No se encuentra ese usuario" });
+                    }  else {
+                        u.update({token:""}, () => {
+                            res.json({ est: 200});
+                        });
+                        
+                    }
+                   
+                })
+})
+router.post('/productos', async (req, res) => {
+    res.json([
+        {
+            producto:"papa",
+            precio:"2.000",
+            cantidad:"20",
+            estado:"vendido",
+            estOpc:false
+        },
+        {
+            producto:"papa",
+            precio:"2.000",
+            cantidad:"20",
+            estado:"vendido",
+            estOpc:false
+        }, {
+            producto:"papa",
+            precio:"2.000",
+            cantidad:"20",
+            estado:"vendido",
+            estOpc:false
+        }, {
+            producto:"papa",
+            precio:"2.000",
+            cantidad:"20",
+            estado:"vendido",
+            estOpc:false
+        }, {
+            producto:"papa",
+            precio:"2.000",
+            cantidad:"20",
+            estado:"vendido",
+            estOpc:false
+        }])
+})
 router.post('/ventas', async (req, res) => {
     res.json([
         {

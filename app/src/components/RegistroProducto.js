@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import Menu from './Menu';
-
-function MainRp(props){
-    const vBotones = [{nombre:"Home",ruta:"#"},{nombre:"Name",ruta:"#"},{nombre:"Log out",ruta:"/login"}]
+import {BotonesRegistroP,SetQuery} from "./BotonesMenu"
+import {validToken} from './requestAPI';
+export default function RegistroProducto(props){
+    const [user, setUser] = useState({name:"",rol:0})
+    useEffect(() => {
+        if(window.Get()){
+            let token= window.Get().t
+            validToken({token},(e)=>{
+                if(e.est!=200){
+                     window.location="/"
+                }else if(e.user.rol==1){
+                    BotonesRegistroP[1].nombre=e.user.name
+                    BotonesRegistroP.map(b=>SetQuery(b,"t",token))
+                    setUser({...e.user})
+                }else{
+                    alert("No tienes los permisos necesarios")
+                    window.location="/?t="+token
+                }
+            })
+        }else{
+            window.location="/"
+        }
+    }, [])
     return(
         <div className="Padre">
 
-        <Menu botones={vBotones}/>
+        <Menu botones={BotonesRegistroP}/>
         <div className="container cent py-5">
             <h1>REGISTRO DE PRODUCTOS</h1>
 
@@ -34,5 +54,3 @@ function MainRp(props){
     </div>    
     );
 }
-
-export default MainRp;

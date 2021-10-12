@@ -30,6 +30,15 @@ export function signUp(b,f){//se registra
 export async function getVentas(b,f){//obtiene las ventas
     api.post('/ventas',b,f)
 }
+export async function getProductos(b,f){//obtiene los productos
+    api.post('/productos',b,f)
+}
+export async function getUsers(b,f){//obtiene los usuarios
+    api.post('/users',b,f)
+}
+export async function logOut(b,f){//salir
+    api.post('/logout',b,f)
+}
 export async function validToken(b,f){//obtiene las ventas
     api.post('/validToken',b,f)
 }

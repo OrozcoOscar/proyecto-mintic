@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import Menu from './Menu';
-import {getVentas} from './requestAPI';
+import {getVentas,validToken} from './requestAPI';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
-import {validToken} from './requestAPI';
 
+import {BotonesVentas,SetQuery} from "./BotonesMenu"
 function Ventas(props){
-     const [user, setUser] = useState({name:""})
-    const vBotones = [{nombre:"Home",ruta:"/ventas"},{nombre:"Name",ruta:"#"},{nombre:"Log out",ruta:"/login"}]
-
+    const [user, setUser] = useState({name:"",rol:0})
     const [ventas,setVentas] = useState([]);
     useEffect(() => {
-        let token=window.Get().t
-        if(token){
+        if(window.Get()){
+            let token=window.Get().t
             validToken({token},(e)=>{
                 if(e.est!=200){
                      window.location="/"
-                }else if( e.user.rol==1 || e.user.rol==2){
-                    user.name=e.user.name
-                    setUser({...user})
+                }else if(e.user.rol==2){
+                    BotonesVentas[1].nombre=e.user.name
+                    BotonesVentas.map(b=>SetQuery(b,"t",token))
+                    setUser({...e.user})
+                    
                     getVentas({},(e)=>{
                         setVentas(e)
                     })
@@ -45,7 +45,7 @@ function Ventas(props){
     return(
         <div className="Padre">
 
-        <Menu botones={vBotones}/>
+        <Menu botones={BotonesVentas} user={user}/>
         <div className="container cent py-5">
             <h1>VENTAS</h1>
 

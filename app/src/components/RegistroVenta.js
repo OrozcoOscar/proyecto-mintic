@@ -1,11 +1,10 @@
 import React from "react";
 import Menu from './Menu';
-
+import {BotonesRegistroV} from "./BotonesMenu"
 function MainRv(props){
-    const vBotones = [{nombre:"Home",ruta:"#"},{nombre:"Name",ruta:"#"},{nombre:"Log out",ruta:"/login"}]
     return(
         <div className="Padre">
-        <Menu botones={vBotones}/>
+        <Menu botones={BotonesRegistroV}/>
         <div className="container cent py-5">
             <h1>REGISTRO DE VENTAS</h1>
 

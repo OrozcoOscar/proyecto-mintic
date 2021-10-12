@@ -1,24 +1,21 @@
 import React,{useState,useEffect} from "react";
 import Menu from './Menu';
 import {signIn,validToken} from './requestAPI';
-
+import {BotonesLogin} from './BotonesMenu';
 export default function Login(props){
-    const vBotones = [{nombre:"Home",ruta:"#"},{nombre:"Log in",ruta:"/login"},{nombre:"Sing up",ruta:"/singup"}]
     const [email, setEmail] = useState("")
     useEffect(() => {
-        let token=window.Get().t
-        if(token){
+        if(window.Get()){
+            let token=window.Get().t
             validToken({token},(e)=>{
                 if(e.est==200){
                     if( e.user.rol==1){
-                        window.location = '/ventas?t='+token;
+                        window.location = '/productos?t='+token;
                     }else if(e.user.rol==2){
                         window.location = '/admin?t='+token;
                     }
                 }
             })
-        }else{
-            window.location="/login"
         }
     }, [])
     function go(){
@@ -28,7 +25,7 @@ export default function Login(props){
             if(e.user.rol==0){
                 alert("Tu cuenta no ha sido activada,comunicate con el administrador")
             }else if(e.user.rol==1){
-                window.location = '/ventas?t='+e.user.token;
+                window.location = '/productos?t='+e.user.token;
             }else{
                 window.location = '/admin?t='+e.user.token;
             }
@@ -40,7 +37,7 @@ export default function Login(props){
     return(
         <div className="Padre">
 
-        <Menu botones={vBotones}/>
+        <Menu botones={BotonesLogin} />
         <div className="container d-flex  py-5 ">
 
             <div className="contenedor d-flex justify-content-center"><p>LOGIN</p></div>

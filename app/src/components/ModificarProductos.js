@@ -1,33 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import Menu from './Menu';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
-import { useState } from 'react';
-
-function MainMp(props){
-    const vBotones = [{nombre:"Home",ruta:"/admin"},{nombre:"Name",ruta:"#"},{nombre:"Log out",ruta:"/login"}]
-
-    const [dropdown,setDropdown] = useState(false);
-    const [dropdown1,setDropdown1] = useState(false);
-    const [dropdown2,setDropdown2] = useState(false);
+import {BotonesModificarP,SetQuery} from './BotonesMenu';
+import {getProductos,validToken} from './requestAPI';
+function ModificarProductos(props){
+    const [user, setUser] = useState({name:"",rol:0})
     
-    const abrirCerrarDropdown=()=>{
-        setDropdown(!dropdown);
+    const [productos,setProductos] = useState([]);
+    useEffect(() => {
+        if(window.Get()){
+            let token=window.Get().t
+            validToken({token},(e)=>{
+                if(e.est!=200){
+                     window.location="/"
+                }else if( e.user.rol==1 || e.user.rol==2){
+                    BotonesModificarP[2].nombre=e.user.name
+                    BotonesModificarP.map(b=>SetQuery(b,"t",token))
+                    setUser({...e.user})
+                    
+                    getProductos({},(e)=>{
+                        setProductos(e)
+                    })
+                }else{
+                    alert("No tienes los permisos necesarios")
+                    window.location="/?t="+token
+                }
+            })
+        }else{
+            window.location="/"
+        }
+    }, [])
+    function updateEst(i){
+        if(productos[i].estOpc){
+            productos[i].estOpc=false
+        }else{
+            for (let e = 0; e < productos.length; e++) {
+                productos[e].estOpc=false
+            }
+            productos[i].estOpc=true
+        }
+        setProductos([...productos])
     }
-    const abrirCerrarDropdown1=()=>{
-        console.log("ok2")
-        setDropdown1(!dropdown1);
-    }
-    const abrirCerrarDropdown2=()=>{
-        setDropdown2(!dropdown2);
-    }
-    console.log("ok1")
     return(
         <div className="Padre">
 
-        <Menu botones={vBotones}/>
+        <Menu botones={BotonesModificarP} user={user}/>
         <div className="container cent py-5">
             
-            <h1>PRODUCTOS</h1>
+            <h1>MODIFICAR PRODUCTOS</h1>
 
             <div className="cent py-5">
                 <div className="container-fluid">
@@ -51,66 +71,31 @@ function MainMp(props){
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>20,000</td>
-                            <td>32</td>
-                            <td>
-                            <Dropdown isOpen={dropdown} toggle={()=>{setDropdown(!dropdown)}}>
-                                    <DropdownToggle>
-                                        Opciones
-                                    </DropdownToggle>
-
-                                    <DropdownMenu>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                    </DropdownMenu>
+                    {
+                            productos.map((v,i)=>(
+                                <tr key={i}>
+                                    <th scope="row">{v.producto}</th>
+                                    <td>{v.precio}</td>
+                                    <td>{v.cantidad}</td>
+                                    <td>
                                     
-                                </Dropdown>
-                            </td>
-                            <td><button className="btn btn-secondary">X</button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>40,000</td>
-                            <td>14</td>
-                            <td>
-                            <Dropdown isOpen={dropdown1} toggle={abrirCerrarDropdown1}>
-                                    <DropdownToggle>
-                                        Opciones
-                                    </DropdownToggle>
+                                    <Dropdown isOpen={v.estOpc} toggle={()=>{}} onClick={()=>updateEst(i)}>
+                                            <DropdownToggle>
+                                                Opciones
+                                            </DropdownToggle>
 
-                                    <DropdownMenu>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                    </DropdownMenu>
-                                    
-                                </Dropdown>
-                            </td>
-                            <td><button className="btn btn-secondary">X</button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>25,000</td>
-                            <td>2</td>
-                            <td>
-                            <Dropdown isOpen={dropdown2} toggle={abrirCerrarDropdown2}>
-                                    <DropdownToggle>
-                                        Opciones
-                                    </DropdownToggle>
-
-                                    <DropdownMenu>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                    </DropdownMenu>
-                                    
-                                </Dropdown>
-                            </td>
-                            <td><button className="btn btn-secondary">X</button></td>
-                        </tr>
+                                            <DropdownMenu>
+                                                <DropdownItem>Accion1</DropdownItem>
+                                                <DropdownItem>Accion1</DropdownItem>
+                                                <DropdownItem>Accion1</DropdownItem>
+                                            </DropdownMenu>
+                                            
+                                        </Dropdown>
+                                    </td>
+                                    <td><button className="btn btn-secondary">X</button></td>
+                                </tr>
+                            ))
+                        }
                     </tbody>
                 </table>
             </div>
@@ -120,4 +105,4 @@ function MainMp(props){
     );
 }
 
-export default MainMp;
+export default ModificarProductos;

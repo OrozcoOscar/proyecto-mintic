@@ -13,7 +13,7 @@ import MainAdmin from './components/MainAdmin';
 
 import Login from './components/Login';
 import Singup from './components/Singup';
-
+import LogOut from './components/LogOut';
 import Reg from './components/reg';
 // import Footer from './components/Footer';
 
@@ -56,6 +56,9 @@ function App() {
           </Route>
           <Route path="/admin">
             <MainAdmin/>
+          </Route>
+          <Route path="/logout">
+          <LogOut/>
           </Route>
           <Route path="/">
           <Login/>

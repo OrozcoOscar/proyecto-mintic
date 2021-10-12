@@ -1,29 +1,50 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Menu from './Menu';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
-import { useState } from 'react';
-
-function MainMc(props){
-    const vBotones = [{nombre:"Home",ruta:"/admin"},{nombre:"Name",ruta:"#"},{nombre:"Log out",ruta:"/login"}]
-
+import {getUsers,validToken} from './requestAPI';
+import {BotonesUsers,SetQuery} from './BotonesMenu';
+function Usuarios(props){
+    const [user, setUser] = useState({name:"",rol:0})
+    const [users,setUsers] = useState([]);
+    useEffect(() => {
+        if(window.Get()){
+            let token=window.Get().t
+            validToken({token},(e)=>{
+                if(e.est!=200){
+                     window.location="/"
+                }else if(e.user.rol==2){
+                    BotonesUsers[1].nombre=e.user.name
+                    BotonesUsers.map(b=>SetQuery(b,"t",token))
+                    setUser({...e.user})
+                    
+                    getUsers({token},(e)=>{
+                        setUsers(e.users)
+                    })
+                }else{
+                    alert("No tienes los permisos necesarios")
+                    window.location="/?t="+token
+                }
+            })
+        }else{
+            window.location="/"
+        }
+    }, [])
+    function updateEst(i){
+        if(users[i].estOpc){
+            users[i].estOpc=false
+        }else{
+            for (let e = 0; e < users.length; e++) {
+                users[e].estOpc=false
+            }
+            users[i].estOpc=true
+        }
+        setUsers([...users])
+    }
     
-    const [dropdown,setDropdown] = useState(false);
-    const [dropdown1,setDropdown1] = useState(false);
-    const [dropdown2,setDropdown2] = useState(false);
-    
-    const abrirCerrarDropdown=()=>{
-        setDropdown(!dropdown);
-    }
-    const abrirCerrarDropdown1=()=>{
-        setDropdown1(!dropdown1);
-    }
-    const abrirCerrarDropdown2=()=>{
-        setDropdown2(!dropdown2);
-    }
     return(
         
         <div>
-        <Menu botones={vBotones}/>
+        <Menu botones={BotonesUsers}/>
         <div className="container cent py-5">
         <h1>USUARIOS</h1>
         
@@ -49,75 +70,38 @@ function MainMc(props){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>dd/mm/aaaa</td>
-                        <td>
-                        <Dropdown isOpen={dropdown} toggle={abrirCerrarDropdown}>
-                                    <DropdownToggle>
-                                        Opciones
-                                    </DropdownToggle>
+                {
+                        users.map((v,i)=>{
+                        return  ( <tr key={i}>
+                                <th scope="row">{v.name}</th>
+                                <td>xxxxxxxxx</td>
+                                <td>xx/xx/xx</td>
+                                <td>{
+                                    (()=>{
+                                        if(v.rol==0)return "Visitante"
+                                        else if(v.rol==1)return "Usuario Natural"
+                                        else if(v.rol==2)return "Admin"
+                                    })()
+                                    }</td>
+                                <td>
+                                
+                                <Dropdown isOpen={v.estOpc} toggle={()=>{}} onClick={()=>updateEst(i)}>
+                                        <DropdownToggle>
+                                            Opciones
+                                        </DropdownToggle>
 
-                                    <DropdownMenu>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                    </DropdownMenu>
-                                    
-                                </Dropdown>
-                        </td>
-                        <td>
-                            <button className="btn btn-success mx-1">X</button>
-                            <button class="btn btn-danger mx-1">O</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>dd/mm/aaaa</td>
-                        <td>
-                        <Dropdown isOpen={dropdown1} toggle={abrirCerrarDropdown1}>
-                                    <DropdownToggle>
-                                        Opciones
-                                    </DropdownToggle>
-
-                                    <DropdownMenu>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                    </DropdownMenu>
-                                    
-                                </Dropdown>
-                        </td>
-                        <td>
-                            <button className="btn btn-success mx-1">X</button>
-                            <button class="btn btn-danger mx-1">O</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry the Bird</td>
-                        <td>dd/mm/aaaa</td>
-                        <td>
-                        <Dropdown isOpen={dropdown2} toggle={abrirCerrarDropdown2}>
-                                    <DropdownToggle>
-                                        Opciones
-                                    </DropdownToggle>
-
-                                    <DropdownMenu>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                        <DropdownItem>Accion1</DropdownItem>
-                                    </DropdownMenu>
-                                    
-                                </Dropdown>
-                        </td>
-                        <td>
-                            <button className="btn btn-success mx-1">X</button>
-                            <button class="btn btn-danger mx-1">O</button>
-                        </td>
-                    </tr>
+                                        <DropdownMenu>
+                                            <DropdownItem>Accion1</DropdownItem>
+                                            <DropdownItem>Accion1</DropdownItem>
+                                            <DropdownItem>Accion1</DropdownItem>
+                                        </DropdownMenu>
+                                        
+                                    </Dropdown>
+                                </td>
+                                <td><button className="btn btn-secondary">X</button></td>
+                            </tr>
+                        )})
+                }
                 </tbody>
             </table>
         </div>
@@ -128,4 +112,4 @@ function MainMc(props){
     );
 }
 
-export default MainMc;
+export default Usuarios;
