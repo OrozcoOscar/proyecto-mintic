@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router()
-
+const axios = require('axios');
 
 /**
  * MODELOS
@@ -49,13 +49,19 @@ router.post('/log', async (req, res) => {//login
 })
 router.post('/validToken',(req, res) => {//validar sesion
     const { token } = req.body;
-    User.findOne({token},{email:0}, (err, u) => {
+    User.findOne({token}, async (err, u) => {
                     if (err) {
                         res.json({ est: err.code, msg: "Algo salio mal,intentalo de nuevo mas tarde" });
                     } else if (!u) {
                         res.json({ est: 404, msg: "No se encuentra ese usuario" });
                     }  else {
-                        res.json({est: 200, user: u})
+                        let json=await axios.get("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token="+token)
+
+                        if(json.data.email==u.email){
+                            res.json({est: 200, user: u})
+                        }else{
+                            res.json({ est: 404, msg: "No se encuentra ese usuario" });
+                        } 
                     }
                    
                 })
@@ -88,6 +94,7 @@ router.post('/logout', async (req, res) =>{
                     } else if (!u) {
                         res.json({ est: 404, msg: "No se encuentra ese usuario" });
                     }  else {
+                        axios.get("https://accounts.google.com/o/oauth2/revoke?token="+token);
                         u.update({token:""}, () => {
                             res.json({ est: 200});
                         });

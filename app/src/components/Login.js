@@ -5,7 +5,7 @@ import {BotonesLogin} from './BotonesMenu';
 import GoogleLogin from 'react-google-login';
 export default function Login(props){
     const [user, setUser] = useState({})
-
+    const [checked, setChecked] = useState(true)
     useEffect(() => {
         if(user.profileObj)
           go() 
@@ -42,6 +42,7 @@ export default function Login(props){
          }
      })
     }
+    console.log(checked)
     return(
         <div className="Padre">
 
@@ -54,8 +55,13 @@ export default function Login(props){
                 <GoogleLogin
                 clientId="245959408070-6jrr6enfgi88v8sur7fkuepp08ur0u62.apps.googleusercontent.com"
                 onSuccess={setUser}
-                isSignedIn={true}
+                isSignedIn={checked}
                 />
+                <br />
+                <div>
+                <input type="checkbox" checked={checked} onClick={(e)=>setChecked(e.target.checked)}/>
+                <span>Mantener sesion Activa</span>
+                </div>
             </div>
 
         </div>

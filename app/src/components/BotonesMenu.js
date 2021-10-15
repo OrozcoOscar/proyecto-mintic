@@ -1,8 +1,7 @@
 
 //------Botones generales---------------
-export const BotonesLogin = [{nombre:"Home",ruta:"/"},{nombre:"Log in",ruta:"/login"},{nombre:"Sing up",ruta:"/singup"}]
-export const BotonesSignUp = [{nombre:"Home",ruta:"/"},{nombre:"Log in",ruta:"/login"},{nombre:"Sing up",ruta:"/singup"}]
-    
+export const BotonesLogin = [{nombre:"Home",ruta:"/"}]
+  
 //-------Botones Admin/comun------------------
 export const BotonesProductos = [
     {nombre:"Home",ruta:"/productos",user:1},
