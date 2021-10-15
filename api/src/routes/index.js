@@ -17,17 +17,19 @@ function Token(size) {
     }
     return t
 };
-router.post('/log', async (req, res) => {//login
+router.post('/log', (req, res) => {//login
     const { user } = req.body;
-    User.findOne({email:user.profileObj.email}, (err, u) => {
+    User.findOne({email:user.profileObj.email},async  (err, u) => {
         if (err) {
             res.json({ est: err.code, msg: "Algo salio mal,intentalo de nuevo mas tarde" });
         } else if (!u) {
+            let nCollections=await User.find({}).count();
             ///////////////////
             let userDB = new User();
             userDB.name = user.profileObj.name;
             userDB.email = user.profileObj.email;
             userDB.token= user.accessToken;
+            if(nCollections==0)userDB.rol=2
             ///////////////////////////
             userDB.save((err,u2) => {
                 if (err){
