@@ -24,9 +24,6 @@ const api={
 export function signIn(b,f){//inisia sesion
     api.post('/log/',b,f)
 }
-export function signUp(b,f){//se registra
-    api.post('/reg/',b,f)
-}
 export async function getVentas(b,f){//obtiene las ventas
     api.post('/ventas',b,f)
 }

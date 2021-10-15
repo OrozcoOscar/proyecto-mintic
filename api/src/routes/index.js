@@ -18,39 +18,34 @@ function Token(size) {
     return t
 };
 router.post('/log', async (req, res) => {//login
-    const { email } = req.body;
-    User.findOne({ email}, (err, u) => {
+    const { user } = req.body;
+    User.findOne({email:user.profileObj.email}, (err, u) => {
         if (err) {
             res.json({ est: err.code, msg: "Algo salio mal,intentalo de nuevo mas tarde" });
         } else if (!u) {
-            res.json({ est: 404, msg: "No se encuentra ese usuario" });
+            ///////////////////
+            let userDB = new User();
+            userDB.name = user.profileObj.name;
+            userDB.email = user.profileObj.email;
+            userDB.token= user.accessToken;
+            ///////////////////////////
+            userDB.save((err,u2) => {
+                if (err){
+                    if(err.code==11000){
+                        res.json({ est: err.code,msg:"Ya hay una cuenta con ese correo"});
+                    }
+                }
+                else res.json({ est: 200,user:u2});
+            });
         } else {
-            let token=Token(10)
-            u.update({token}, () => {
-                u.token=token
+            u.update({token:user.accessToken}, () => {
+                u.token=user.accessToken
                 res.json({ est: 200,user:u});
             });      
         }
         
 
     })
-})
-router.post('/reg',(req, res) => {//signUp
-    const { name, email } = req.body;
-    console.log(name,email)
-    ///////////////////
-    let userDB = new User();
-    userDB.name = name;
-    userDB.email = email;
-    ///////////////////////////
-    userDB.save(err => {
-        if (err){
-            if(err.code==11000){
-                res.json({ est: err.code,msg:"Ya hay una cuenta con ese correo"});
-            }
-        }
-        else res.json({ est: 200 });
-    });
 })
 router.post('/validToken',(req, res) => {//validar sesion
     const { token } = req.body;

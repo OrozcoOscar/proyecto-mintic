@@ -1,4 +1,3 @@
-import React from "react";
 
 //------Botones generales---------------
 export const BotonesLogin = [{nombre:"Home",ruta:"/"},{nombre:"Log in",ruta:"/login"},{nombre:"Sing up",ruta:"/singup"}]

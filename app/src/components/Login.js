@@ -1,9 +1,17 @@
 import React,{useState,useEffect} from "react";
 import Menu from './Menu';
-import {signIn,validToken} from './requestAPI';
+import {signIn,validToken} from './requestAPI'
 import {BotonesLogin} from './BotonesMenu';
+import GoogleLogin from 'react-google-login';
 export default function Login(props){
-    const [email, setEmail] = useState("")
+    const [user, setUser] = useState({})
+
+    useEffect(() => {
+        if(user.profileObj)
+          go() 
+      }, [user])
+
+
     useEffect(() => {
         if(window.Get()){
             let token=window.Get().t
@@ -18,9 +26,9 @@ export default function Login(props){
             })
         }
     }, [])
+
     function go(){
-    console.log(email)
-     signIn({email},(e)=>{
+     signIn({user},(e)=>{
          if(e.est==200){
             if(e.user.rol==0){
                 alert("Tu cuenta no ha sido activada,comunicate con el administrador")
@@ -43,16 +51,11 @@ export default function Login(props){
             <div className="contenedor d-flex justify-content-center"><p>LOGIN</p></div>
             <div className="line d-flex "></div>
             <div className="siderbar d-flex justify-content-center align-items-center">
-                <a href="/productos">
-                    <button type="button" class="btn btn-primary">
-                         <i className="fa fa-google"></i> Continue with Google
-                    </button>
-                </a>
-
-                <input type="text" placeholder="email" 
-                value={email} 
-                onChange={e=>setEmail(e.target.value)}/>
-                <input type="submit"value="Continuar" onClick={go} />
+                <GoogleLogin
+                clientId="245959408070-6jrr6enfgi88v8sur7fkuepp08ur0u62.apps.googleusercontent.com"
+                onSuccess={setUser}
+                isSignedIn={true}
+                />
             </div>
 
         </div>

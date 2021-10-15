@@ -12,11 +12,7 @@ import Productos from './components/Productos';
 import MainAdmin from './components/MainAdmin';
 
 import Login from './components/Login';
-import Singup from './components/Singup';
 import LogOut from './components/LogOut';
-import Reg from './components/reg';
-// import Footer from './components/Footer';
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -41,10 +37,7 @@ function App() {
           </Route>
           <Route path="/login">
             <Login/>
-          </Route> 
-          <Route path="/singup">
-            <Reg/>
-          </Route> 
+          </Route>
           <Route path="/ventas">
             <Ventas/>
           </Route>
