@@ -2,22 +2,32 @@ import React from "react";
 export const HOST="http://192.168.0.14:3001"
 const api={
     get:async (url,f=()=>{})=>{
-        await fetch(HOST+url)
-        .then((response) => response.json())
-        .then((json) => {
-           f(json)
-        })
+        try {
+            await fetch(HOST+url)
+            .then((response) => response.json())
+            .then((json) => {
+               f(json)
+            }) 
+        } catch (error) {
+            alert("Se perdio la conexion con el servidor");
+        }
+
     },
     post:async (url,body,f=()=>{})=>{
-        await fetch(HOST+url,{
-            method:"post",
-            body:JSON.stringify(body),
-            headers:{'Content-Type': 'application/json'}
-            })
-        .then((response) => response.json())
-        .then((json) => {
-           f(json)
-        })
+        try {
+            await fetch(HOST+url,{
+                method:"post",
+                body:JSON.stringify(body),
+                headers:{'Content-Type': 'application/json'}
+                })
+            .then((response) => response.json())
+            .then((json) => {
+               f(json)
+            }) 
+        } catch (error) {
+            alert("Se perdio la conexion con el servidor");
+        }
+       
     }
 }
 
@@ -48,8 +58,17 @@ export async function upDateStatus(b,f){//cambiar rol
 export async function upDateStatusProducto(b,f){//Poner ventas
     api.post('/upDateStatusProducto',b,f)
 }
+export async function upDateStatusVenta(b,f){//Poner ventas
+    api.post('/upDateStatusVenta',b,f)
+}
 export async function searchProducto(b,f){//Busqueda
     api.post('/searchProducto',b,f)
+}
+export async function searchVenta(b,f){//Busqueda de venta
+    api.post('/searchVenta',b,f)
+}
+export async function searchUser(b,f){//Busqueda de venta
+    api.post('/searchUser',b,f)
 }
 export async function setVentas(b,f){//Poner ventas
     api.post('/setVentas',b,f)

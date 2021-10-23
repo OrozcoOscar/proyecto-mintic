@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Menu from './Menu';
-import {validToken,searchProducto,setVentas} from './requestAPI';
-import {BotonesRegistroV,SetQuery} from "./BotonesMenu"
+import {validToken,searchProducto,setVentas,getVentas} from './requestAPI';
+import {BotonesRegistroV,SetQuery,} from "./BotonesMenu"
 
 
 
 export default function RegistroVenta(props){
-    const [formulario,setFormulario]= useState({})
+
+    const [formulario,setFormulario]= useState({modificar:false})
+
     const [user, setUser] = useState({name:"",rol:0})
+
     const [productos,setProductos] = useState([]);
+
 
     const upDateFormulario = (key,value) =>{
         formulario[key] = value;
@@ -18,13 +22,35 @@ export default function RegistroVenta(props){
     useEffect(() => {
         if(window.Get()){
             let token=window.Get().t
+            let idVenta = window.Get().vent
             validToken({token},(e)=>{
                 if(e.est!=200){
                      window.location="/"
-                }else if(e.user.rol==2){
+                }else if(e.user.rol==1 ||e.user.rol==2){
                     BotonesRegistroV[1].nombre=e.user.name
                     BotonesRegistroV.map(b=>SetQuery(b,"t",token))
                     setUser({...e.user})
+                    if(idVenta){
+                        
+                        getVentas({...e.user},(e)=>{
+                            e.map(v =>{
+                                if(v._id === idVenta){
+                                    formulario.modificar = true
+                                    formulario.producto = v.productoID.nombre
+                                    formulario.productoID = v.productoID._id
+                                    formulario.fecha = v.fecha
+                                    formulario.valor = v.valor
+                                    formulario.cantidad = v.cantidad
+                                    formulario.estados = v.estados
+                                    
+                                    setFormulario({...formulario,idVenta})
+                                    
+                                    
+                                }
+                            })
+                            
+                        })
+                    }
                     
                 }else{
                     alert("No tienes los permisos necesarios")
@@ -35,7 +61,7 @@ export default function RegistroVenta(props){
             window.location="/"
         }
     }, [])
-    
+
     const busqueda = (sh) =>{
         if(sh.length > 1){
             searchProducto({search:sh,user} , (e)=>{
@@ -46,7 +72,6 @@ export default function RegistroVenta(props){
         }
         
     }
-    console.log(formulario)
     return(
         <div className="Padre">
         <Menu botones={BotonesRegistroV}/>
@@ -58,10 +83,22 @@ export default function RegistroVenta(props){
                     
                     <div className="mb-3">
                         <label for="idDescripcion" className="form-label">Nombre del producto:</label>
-                        <input autocomplete="off" value = {formulario.producto} onChange = {e =>{upDateFormulario("producto",e.target.value)
-                        busqueda(formulario.producto)
+                        {
+                            (()=>{
+
+                                if(formulario.modificar){
+
+                                    return <input readOnly autocomplete="off" value = {formulario.producto} onChange = {e =>{upDateFormulario("producto",e.target.value)
+                                    busqueda(formulario.producto)
+                                    }
+                                }  type="text" className="form-control" id="idDescripcion"/>
+                                
+                                }else  return <input  autocomplete="off" value = {formulario.producto} onChange = {e =>{upDateFormulario("producto",e.target.value)
+                                busqueda(formulario.producto)
+                                }
+                            }  type="text" className="form-control" id="idDescripcion"/>
+                            })()
                         }
-                    }  type="text" className="form-control" id="idDescripcion"/>
                         <div className ="blockList">
                             {   
                                 
@@ -99,9 +136,27 @@ export default function RegistroVenta(props){
                     <label for="idEstado" className="form-label">Estado:</label>
                     <select defaultValue = {formulario.estados}  onChange = {e =>upDateFormulario("estados",e.target.value)}>
                         <option >Seleccionar</option>
-                        <option value="1">En proceso</option>
-                        <option value="2">Cancelada</option>
-                        <option value="3">Entregada</option>
+                        {
+                            (()=>{
+                                if(formulario.estados == "1"){
+                                    return <option selected value="1">En proceso</option>
+                                }else  return <option value="1">En proceso</option>
+                            })()
+                        }
+                        {
+                            (()=>{
+                                if(formulario.estados == "2"){
+                                    return <option selected value="2">Cancelada</option>
+                                }else  return <option value="2">Cancelada</option>
+                            })()
+                        }
+                        {
+                            (()=>{
+                                if(formulario.estados == "3"){
+                                    return <option selected value="3">Entregada</option>
+                                }else  return <option value="3">Entregada</option>
+                            })()
+                        }
                     </select>
                 </div>
                 

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Menu from './Menu';
 import {BotonesProductos,SetQuery} from './BotonesMenu';
-import {validToken,getProductos} from './requestAPI';
+import {validToken,getProductos,getVentas} from './requestAPI';
 
 
 function Productos(props){
     const [user, setUser] = useState({name:"",rol:0})
-    const [productos,setProductos] = useState([]);
+    // const [productos,setProductos] = useState([]);
+    const [ventas,setVentas] = useState([]);
 
     useEffect(() => {
         if(window.Get()){
@@ -18,8 +19,8 @@ function Productos(props){
                     BotonesProductos[1].nombre=e.user.name
                     BotonesProductos.map(b=>SetQuery(b,"t",token))
                     setUser({...e.user})
-                    getProductos({...e.user},(e)=>{
-                        setProductos(e)
+                    getVentas({...e.user},(e)=>{
+                        setVentas(e)
                     })
                 }else{
                     alert("No tienes los permisos necesarios")
@@ -34,28 +35,28 @@ function Productos(props){
         <div className="Padre">
         <Menu botones={BotonesProductos}/>
         <div className="container cent py-5">
-            <h1>PRODUCTOS</h1>
+            <h1>Ventas</h1>
 
             <div className="container d-flex flex-row  cent">
 
             <div className="col-sm-4 ">
                     <div className="card">
                         <div className="card-body text-center">
-                            <h5 className="card-title">Producto</h5>
-                            <p class="card-text">Agregar datos al nuevo producto</p>
-                            <a href={"/registro-producto?t="+user.token} className="btn btn-primary btn-lg">Agregar producto</a>
+                            <h5 className="card-title">Venta</h5>
+                            <p class="card-text">Agregar datos a la nueva venta</p>
+                            <a href={"/registro-venta?t="+user.token} className="btn btn-primary btn-lg">Agregar Venta</a>
                         </div>
                     </div>
                 </div>
 
             { 
-                    productos.map((p,i)=>(
+                    ventas.map((p,i)=>(
 
                     <div className="col-sm-4">
                         <div className="card">
                             <div className="card-body text-center">
                                 <h5 className="card-title">{p.nombre}</h5>
-                                <p className="card-text">{p.precio}</p>
+                                <p className="card-text">{p.valor}</p>
                                 <p className="card-text">{p.cantidad}</p>
                                 <a href="#" className="btn btn-primary btn-lg">Ver</a>
                             </div>

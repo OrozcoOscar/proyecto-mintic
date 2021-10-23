@@ -10,7 +10,8 @@ export default function Login(props){
     useEffect(() => {
         if(user.profileObj)
           go() 
-      }, [user])
+      },
+       [user])
 
 
     useEffect(() => {
@@ -19,7 +20,7 @@ export default function Login(props){
             validToken({token},(e)=>{
                 if(e.est==200){
                     if( e.user.rol==1){
-                        window.location = '/productos?t='+token;
+                        window.location = '/ventas?t='+token;
                     }else if(e.user.rol==2){
                         window.location = '/admin?t='+token;
                     }
@@ -34,8 +35,8 @@ export default function Login(props){
             if(e.user.rol==0){
                 alert("Tu cuenta no ha sido activada,comunicate con el administrador")
             }else if(e.user.rol==1){
-                window.location = '/productos?t='+e.user.token;
-            }else{
+                window.location = '/ventas?t='+e.user.token;
+            }else if(e.user.rol==2){
                 window.location = '/admin?t='+e.user.token;
             }
          }else{
@@ -43,7 +44,6 @@ export default function Login(props){
          }
      })
     }
-    console.log(checked)
     return(
         <div className="Padre">
 

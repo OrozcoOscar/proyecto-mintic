@@ -1,13 +1,14 @@
 import React,{useState,useEffect} from "react";
 import Menu from './Menu';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
-import {getUsers,validToken,upDateStatus} from './requestAPI';
+import {getUsers,validToken,upDateStatus,searchUser} from './requestAPI';
 import {BotonesUsers,SetQuery} from './BotonesMenu';
 
 function Usuarios(props){
 
-    const [user, setUser] = useState({name:"",rol:0})
+    const [user, setUser] = useState({name:"",rol:0});
     const [users,setUsers] = useState([]);
+    const [consulta,setConsulta] = useState("");
 
     useEffect(() => {
         if(window.Get()){
@@ -35,17 +36,13 @@ function Usuarios(props){
 
     }, [])
 
-    // function updateEst(i){
-    //     if(users[i].estOpc){
-    //         users[i].estOpc=false
-    //     }else{
-    //         for (let e = 0; e < users.length; e++) {
-    //             users[e].estOpc=false
-    //         }
-    //         users[i].estOpc=true
-    //     }
-    //     setUsers([...users])
-    // }
+    const busqueda = (sh) =>{
+        
+        searchUser({search:sh,user} , (e)=>{
+            setUsers([...e]);
+        })
+    }
+
     
     return(
         
@@ -57,8 +54,10 @@ function Usuarios(props){
         <div className="cent py-5">
             <div className="container-fluid">
                 <form className="d-flex">
-                <input className="form-control buscador me-2" type="search" placeholder="Search" aria-label="Search"/>
-                <button className="btn btn-primary btn-busc" type="submit">Search</button>
+                <input  value = {consulta} onChange = {e =>{
+                    setConsulta(e.target.value)
+                    busqueda(e.target.value)
+                    }}className="form-control buscador me-2" type="search" placeholder="Search" aria-label="Search"/>
                 </form>
             </div>
         </div>

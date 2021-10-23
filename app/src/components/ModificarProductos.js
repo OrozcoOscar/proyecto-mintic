@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Menu from './Menu';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
 import {BotonesModificarP,SetQuery} from './BotonesMenu';
-import {getProductos,validToken,upDateStatusProducto} from './requestAPI';
+import {getProductos,validToken,upDateStatusProducto,searchProducto} from './requestAPI';
 
 
 function ModificarProductos(props){
     const [user, setUser] = useState({name:"",rol:0})
     
     const [productos,setProductos] = useState([]);
+
+    const [consulta,setConsulta] = useState("");
+
     
     useEffect(() => {
         if(window.Get()){
@@ -33,6 +36,16 @@ function ModificarProductos(props){
             window.location="/"
         }
     }, [])
+
+    const busqueda = (sh) =>{
+        
+            searchProducto({search:sh,user} , (e)=>{
+                setProductos([...e]);
+                
+            })
+    }
+    
+
     function updateEst(i){
         if(productos[i].estOpc){
             productos[i].estOpc=false
@@ -55,8 +68,11 @@ function ModificarProductos(props){
             <div className="cent py-5">
                 <div className="container-fluid">
                     <form className="d-flex">
-                    <input className="form-control buscador me-2" type="search" placeholder="Search" aria-label="Search"/>
-                    <button className="btn btn-primary" type="submit">Search</button>
+                    <input value = {consulta} onChange = {e =>{
+                    setConsulta(e.target.value)
+                    busqueda(e.target.value)
+
+                    }}  className="form-control buscador me-2" type="search" placeholder="Search" aria-label="Search"/>
                     </form>
                 </div>
             </div>
@@ -89,13 +105,15 @@ function ModificarProductos(props){
                                         <option value="2">No disponible</option>
                                     </select>
                                     </td>
-                                    <td><button className="btn btn-secondary">X</button></td>
+                                    <td><button className="btn btn-secondary" onClick ={()=>{window.location.href = "/registro-producto?t="+user.token+"&product="+v._id}}>X</button></td>
                                 </tr>
                             ))
                         }
                     </tbody>
                 </table>
+                
             </div>
+            <button type="button" className="btn btn-success" onClick ={()=>window.location.href = "/registro-producto?t="+user.token}>Agregar</button>
         </div>
         </div>
         
