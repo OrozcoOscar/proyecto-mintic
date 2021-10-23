@@ -106,6 +106,7 @@ export default function RegistroVenta(props){
                                     return <div onClick ={()=>{
                                         upDateFormulario("producto",p.nombre)
                                         upDateFormulario("idProducto",p._id)
+                                        upDateFormulario("valor",p.precio)
                                         setProductos([])
                                     }}>{p.nombre}</div>
                                 })
@@ -129,8 +130,8 @@ export default function RegistroVenta(props){
                 </div>
                 
                 <div className="mb-3">
-                    <label for="idvalor" className="form-label">Valor de compra:</label>
-                    <input value = {formulario.valor} onChange = {e =>upDateFormulario("valor",e.target.value)}  type="text" className="form-control" id="idvalor"/>
+                    <label for="idvalor"  className="form-label">Valor de compra:</label>
+                    <input readOnly value = {formulario.valor} onChange = {e =>upDateFormulario("valor",e.target.value)}  type="text" className="form-control" id="idvalor"/>
                 </div>
                 <div className="mb-3">
                     <label for="idEstado" className="form-label">Estado:</label>
