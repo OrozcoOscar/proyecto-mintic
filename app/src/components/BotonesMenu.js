@@ -26,6 +26,7 @@ export const BotonesRegistroP = [
 ]
 export const BotonesRegistroV = [
     {nombre:"Home",ruta:"/admin",user:2},
+    {nombre:"Home",ruta:"/ventas",user:1},
     {nombre:"Name",ruta:"#"},
     {nombre:"Log out",ruta:"/logout"}
 ]

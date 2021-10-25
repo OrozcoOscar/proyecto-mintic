@@ -3,10 +3,10 @@ import React from "react";
 function Menu({botones,user,colores}){
     console.log(colores)
     return(
-        <nav className="navbar  navbar-light px-5 py-3" style={{color:colores}}>
+        <nav className="navbar navbar-light px-5 py-3 navbar-fijo" style={{color:colores}}>
             
             <div className="container-fluid" >
-                <h2>XVino</h2>
+                <h2>XWine</h2>
                 <div>
                     {botones.map((b,i)=>{
                         if(user && b.user){

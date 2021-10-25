@@ -49,7 +49,7 @@ export default function Login(props){
         <div className="container d-flex  py-5 ">
             {/* Contenedor 1  */}
             <div className="contenedor d-flex justify-content-center">
-                <h1>XVINO</h1>
+                <h1>XWine</h1>
                 <p>El mejor gestor de ventas para administrar tus mejores vinos, obtener una mejor organización y una mejor forma de ver tu negocio.</p>
                 <p>No lo pienses mas y registrate es totalmente GRATIS </p>
             </div>

@@ -27,7 +27,7 @@ export default function RegistroVenta(props){
                 if(e.est!=200){
                      window.location="/"
                 }else if(e.user.rol==1 ||e.user.rol==2){
-                    BotonesRegistroV[1].nombre=e.user.name
+                    BotonesRegistroV[2].nombre=e.user.name
                     BotonesRegistroV.map(b=>SetQuery(b,"t",token))
                     setUser({...e.user})
                     if(idVenta){
@@ -74,7 +74,7 @@ export default function RegistroVenta(props){
     }
     return(
         <div className="Padre" style = {{backgroundImage:`url(${fondo})`,backgroundRepeat  : 'no-repeat',backgroundSize: 'cover'}}>
-        <Menu botones={BotonesRegistroV} colores ={"white"}/>
+        <Menu botones={BotonesRegistroV} user = {user} colores ={"white"}/>
         <div className="container cent py-5">
             <h1 style = {{color:"white"}}>VENTAS</h1>
 

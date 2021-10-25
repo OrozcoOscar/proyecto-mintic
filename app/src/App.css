@@ -10,7 +10,6 @@
 }
 
 .navbar{
-  /* background-color: #A5A6F6 !important; */
   background-color: transparent !important;
 }
 
@@ -73,7 +72,6 @@
 }
 
 .table{
-  /* background-color: rgb(54, 48, 48) !important; */
   border-radius: 20px !important;
   border: 5px solid black p !important;
   width: 800px !important;
@@ -85,7 +83,6 @@
 .curvo{
   padding: 15px 30px;
   border-radius: 5px;
-  /* background-color: rgb(54, 48, 48) !important; */
   border: 1px solid rgba(0, 0, 0, 0.397);
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.308);
 }
@@ -165,3 +162,8 @@
   opacity: 0.9;
   font-weight: bold;
 }
+
+.navbar-fijo{
+  position: fixed;
+}
+
