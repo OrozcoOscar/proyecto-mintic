@@ -4,10 +4,11 @@ const Schema = mongoose.Schema;
 
 const TaskSchema = new Schema({
     userID:{type:Schema.ObjectId, required: true},
-    nombre :{type:String, required: true},
+    nombre :{type:String, required: true, unique:true},
     precio:{type:String , required: true},
-    cantidad:{type:Number , required: true},
-    estado:{type:Number,default:0 },
+    cantidad:{type:String , required: true},
+    estados:{type:String , required: true},
     
 }); 
-module.exports = mongoose.model('producto', TaskSchema)
+
+module.exports = mongoose.model('productos', TaskSchema)

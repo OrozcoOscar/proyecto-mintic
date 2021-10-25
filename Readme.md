@@ -98,7 +98,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 `git fetch mintic`
 
-listo  ya debes de tener las ramas en tu pc,para hacer un push :
+listo ya debes de tener las ramas en tu pc, para hacer un push :
 
-`git commit -am "mi commit"`   > `-am` se usa para archivos ya existentes como en este caso; pero si presenta errores usa `git add .` y luego `git commit -am "mi commit"` finalmente `git push [tu rama]
-`git commit -am "mi commit"`   > `-am` se usa para archivos ya existentes como en este caso; pero si presenta errores usa `git add .` y luego `git commit -am "mi commit"` finalmente `git push [tu rama]` si presenta errores `git push mintic/[tu rama]`
+`git commit -am "mi commit"`   > `-am` se usa para archivos ya existentes como en este caso; pero si presenta errores 
+
+usa `git add .` y luego `git commit -am "mi commit"`
+
+finalmente `git push [tu rama]` si presenta errores `git push mintic/[tu rama]` 

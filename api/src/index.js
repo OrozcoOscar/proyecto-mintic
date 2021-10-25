@@ -6,7 +6,7 @@ const cors= require('cors')
 const mongoose = require('mongoose');
 const http = require("http").Server(app);
 //Conecte dbs
-mongoose.connect('mongodb://localhost/gestionventas')
+mongoose.connect('mongodb+srv://Andres:a123@cluster0.csjti.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
     .then(db=>{console.log('db is connected')})
     .catch(err => console.log(err));
 

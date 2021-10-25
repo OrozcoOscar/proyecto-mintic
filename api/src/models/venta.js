@@ -3,10 +3,13 @@ const Schema = mongoose.Schema;
 
 
 const TaskSchema = new Schema({
-    productoID :{type:Schema.ObjectId, required: true},
+
+    productoID :{type:Schema.ObjectId, required: true,ref:"productos"},
     adminID :{type:Schema.ObjectId, required: true},
-    fecha:{type:Date , required: true},
-    valor:{type:String , required: true},
-    estado:{type:Number,default:0},
+    fecha:{type:String , required: true},
+    valor:{type:Number , required: true},
+    cantidad:{type:Number , required: true},
+    estados:{type:Number,default:0},
     });
-module.exports = mongoose.model('venta', TaskSchema)
+    
+module.exports = mongoose.model('ventas', TaskSchema)

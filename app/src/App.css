@@ -10,17 +10,33 @@
 }
 
 .navbar{
-  background-color: #A5A6F6 !important;
+  background-color: transparent !important;
 }
 
 .form-plant{
-  padding: 30px;
+  max-height: 20 vh;
   margin-top: 40px;
   background-color: #A5A6F6;
   border: 1px solid black;
-  border-radius: 30px;
+  border-radius: 5px;
   padding: 40px 50px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.705);
+}
+
+.blockList{
+  background: white;
+  margin-top: 10px;
+  z-index: 9;
+  position: absolute;
+  width: 24.5%;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 0 20px 1px ;
+
+}
+.blockList div{
+  margin: 10px;
+  cursor: pointer;
 }
 
 .form-control{
@@ -60,11 +76,13 @@
   border: 5px solid black p !important;
   width: 800px !important;
 }
+.letrasBlancas{
+  color: white !important;
+}
 
 .curvo{
   padding: 15px 30px;
-  border-radius: 20px;
-  background-color: #e7e8fd;
+  border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.397);
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.308);
 }
@@ -73,11 +91,12 @@
   border: 1px solid black !important;
 }
 .contenedor{
-  width: 50%;
   margin-right: 10rem;
-  height: 2rem;
-  font-size: 10em;
+  color: white;
+  display: flex;
+  flex-direction: column;
 }
+
 .contenedor2{
   width: 40%;
   margin-right: 10rem;
@@ -119,3 +138,32 @@
     transform: rotate(360deg);
   }
 }
+.PadreLogin{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.Padre{
+  min-height: 100vh; 
+}
+.centrando{
+  display: flex;
+  align-items: center;
+}
+
+.pColor{
+  background-color: rgb(54, 48, 48) !important;
+  color: white;
+  opacity: 0.9;
+  font-weight: bold;
+}
+.pColor1{
+  background-color: rgb(185, 171, 171) !important;
+  opacity: 0.9;
+  font-weight: bold;
+}
+
+.navbar-fijo{
+  position: fixed;
+}
+

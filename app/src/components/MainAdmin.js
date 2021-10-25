@@ -2,6 +2,9 @@ import React,{useState,useEffect} from "react";
 import Menu from './Menu';
 import {validToken} from './requestAPI';
 import {BotonesAdmin,SetQuery} from './BotonesMenu';
+import fondo from './assest/fondoRojo.jpeg';
+
+
 function MainAdmin(props){
      const [user, setUser] = useState({name:"",rol:0})
      let token=""
@@ -28,36 +31,35 @@ function MainAdmin(props){
     
 
     return(
-        <div className="Padre">
+        <div className="Padre" style = {{backgroundImage:`url(${fondo})`,backgroundRepeat  : 'no-repeat',backgroundSize: 'cover'}}>
 
-        <Menu botones={BotonesAdmin} user={user}/>
+        <Menu botones={BotonesAdmin} user={user} colores ={"white"}/>
         
-        <div className="container d-flex  cent py-5">
+        <div className="container  cent py-5">
             
-        <div><h1>ADMIN</h1></div>
         
             <div className="container d-flex flex-row  cent">
             <div className="col-sm-4">
-                    <div className="card">
+                    <div className="card pColor"  style={{  height: 250,width: 250,fontSize:4}}>
                     <div className="card-body text-center">
-                        <h5 className="card-title">Usuarios</h5>
-                        <a href={"/usuarios/?t="+user.token} className="btn btn-primary btn-lg">Ver</a>
+                        <h5 className="card-title" style={{ fontSize:40 }}>Gestión de usuarios</h5>
+                        <a href={"/usuarios/?t="+user.token} className="btn btn-danger btn-lg">Ver</a>
                     </div>
                     </div>
                 </div>
                 <div className="col-sm-4">
-                    <div className="card">
+                    <div className="card pColor"  style={{  height: 250,width: 250 }}>
                     <div className="card-body text-center">
-                        <h5 className="card-title">Ventas</h5>
-                        <a href={"/ventas/?t="+user.token} className="btn btn-primary btn-lg">Ver</a>
+                        <h5 className="card-title" style={{ fontSize:40 }}>Gestión de ventas</h5>
+                        <a href={"/ventas/?t="+user.token} className="btn btn-danger btn-lg">Ver</a>
                     </div>
                     </div>
                 </div>
                 <div className="col-sm-4">
-                    <div className="card ">
+                    <div className="card pColor "  style={{  height: 250,width: 250 }}>
                         <div className="card-body text-center">
-                            <h5 className="card-title">Productos</h5>
-                            <a href={"/modificar-productos/?t="+user.token} className="btn btn-primary btn-lg">Ver</a>
+                            <h5 className="card-title" style={{ fontSize:40 }}>Gestión de productos</h5>
+                            <a href={"/modificar-productos/?t="+user.token} className="btn btn-danger btn-lg">Ver</a>
                         </div>
                     </div>
                 </div>
