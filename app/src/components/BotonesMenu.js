@@ -20,12 +20,17 @@ export const BotonesModificarP = [
     {nombre:"Log out",ruta:"/logout"}
 ]
 export const BotonesRegistroP = [
-    {nombre:"Home",ruta:"/productos",user:1},
+    {nombre:"Home",ruta:"/admin",user:1},
     {nombre:"Name",ruta:"#"},
     {nombre:"Log out",ruta:"/logout"}
 ]
 export const BotonesRegistroV = [
     {nombre:"Home",ruta:"/admin",user:2},
+    {nombre:"Name",ruta:"#"},
+    {nombre:"Log out",ruta:"/logout"}
+]
+export const BotonesRegistroV1 = [
+    {nombre:"Home",ruta:"/ventas",user:1},
     {nombre:"Name",ruta:"#"},
     {nombre:"Log out",ruta:"/logout"}
 ]

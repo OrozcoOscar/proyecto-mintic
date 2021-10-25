@@ -3,6 +3,7 @@ import Menu from './Menu';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
 import {BotonesModificarP,SetQuery} from './BotonesMenu';
 import {getProductos,validToken,upDateStatusProducto,searchProducto} from './requestAPI';
+import fondo from './assest/fondoRojo.jpeg';
 
 
 function ModificarProductos(props){
@@ -58,12 +59,12 @@ function ModificarProductos(props){
         setProductos([...productos])
     }
     return(
-        <div className="Padre">
+        <div className="Padre" style = {{backgroundImage:`url(${fondo})`,backgroundRepeat  : 'no-repeat',backgroundSize: 'cover'}}>
 
-        <Menu botones={BotonesModificarP} user={user}/>
-        <div className="container cent py-5">
+        <Menu botones={BotonesModificarP} user={user} colores ={"white"}/>
+        <div className="container cent ">
             
-            <h1>MODIFICAR PRODUCTOS</h1>
+            <h1 style = {{color:"white"}}>Gestión de productos</h1>
 
             <div className="cent py-5">
                 <div className="container-fluid">
@@ -76,10 +77,10 @@ function ModificarProductos(props){
                     </form>
                 </div>
             </div>
-            <h3>Resultados</h3>
+            <h3 style = {{color:"white"}}>Resultados</h3>
 
-            <div className="cent my-4 curvo">
-                <table className="table table-striped">
+            <div className="cent my-4 pColor curvo letrasBlancas">
+                <table className="table table-striped letrasBlancas">
                     <thead>
                         <tr>
                             <th scope="col">Producto</th>
@@ -93,9 +94,9 @@ function ModificarProductos(props){
                     {
                             productos.map((v,i)=>(
                                 <tr key={i}>
-                                    <th scope="row">{v.nombre}</th>
-                                    <td>{v.precio}</td>
-                                    <td>{v.cantidad}</td>
+                                    <th style = {{color:"white"}} scope="row">{v.nombre}</th>
+                                    <td style = {{color:"white"}}>{v.precio}</td>
+                                    <td style = {{color:"white"}}>{v.cantidad}</td>
                                     <td>
                                     
                                     <select defaultValue = {v.estados}  onChange = {e =>{upDateStatusProducto({user:{...v,estados:e.target.value},admin:user})}}>
@@ -113,9 +114,9 @@ function ModificarProductos(props){
                 </table>
                 
             </div>
-            <button type="button" className="btn btn-success" onClick ={()=>window.location.href = "/registro-producto?t="+user.token}>Agregar</button>
+            <button type="button" className="btn btn-danger" onClick ={()=>window.location.href = "/registro-producto?t="+user.token}>Agregar</button>
         </div>
-        </div>
+    </div>
         
     );
 }

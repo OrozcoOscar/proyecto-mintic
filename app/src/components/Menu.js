@@ -1,18 +1,20 @@
 import React from "react";
 
-function Menu({botones,user}){
+function Menu({botones,user,colores}){
+    console.log(colores)
     return(
-        <nav className="navbar navbar-light px-5 py-3">
-            <div className="container-fluid">
-                <h2>APP-NAME</h2>
+        <nav className="navbar  navbar-light px-5 py-3" style={{color:colores}}>
+            
+            <div className="container-fluid" >
+                <h2>XVino</h2>
                 <div>
                     {botones.map((b,i)=>{
                         if(user && b.user){
                             if(b.user==user.rol){
-                                return (<a key={i} className="navbar-brand px-2" href={b.ruta}>{b.nombre}</a>)
+                                return (<a key={i} style={{color:"white"}} className="navbar-brand px-2" href={b.ruta}>{b.nombre}</a>)
                             }
                         }else{
-                            return (<a key={i} className="navbar-brand px-2" href={b.ruta}>{b.nombre}</a>)
+                            return (<a key={i} style={{color:"white"}} className="navbar-brand px-2" href={b.ruta}>{b.nombre}</a>)
                         }
                     })}
                     

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Menu from './Menu';
 import {validToken,searchProducto,setVentas,getVentas} from './requestAPI';
 import {BotonesRegistroV,SetQuery,} from "./BotonesMenu"
-
+import fondo from './assest/fondoRojo.jpeg';
 
 
 export default function RegistroVenta(props){
@@ -73,12 +73,12 @@ export default function RegistroVenta(props){
         
     }
     return(
-        <div className="Padre">
-        <Menu botones={BotonesRegistroV}/>
+        <div className="Padre" style = {{backgroundImage:`url(${fondo})`,backgroundRepeat  : 'no-repeat',backgroundSize: 'cover'}}>
+        <Menu botones={BotonesRegistroV} colores ={"white"}/>
         <div className="container cent py-5">
-            <h1>REGISTRO DE VENTAS</h1>
+            <h1 style = {{color:"white"}}>VENTAS</h1>
 
-            <form className="form-plant"  onSubmit = {(e)=>e.preventDefault()}> 
+            <form className="form-plant pColor"  onSubmit = {(e)=>e.preventDefault()} style = {{color:"white"}}> 
                 <div className="dist2">
                     
                     <div className="mb-3">
@@ -99,7 +99,7 @@ export default function RegistroVenta(props){
                             }  type="text" className="form-control" id="idDescripcion"/>
                             })()
                         }
-                        <div className ="blockList">
+                        <div className ="blockList" style={{color:'black'}}>
                             {   
                                 
                                 productos.map((p,e)=>{
@@ -163,7 +163,7 @@ export default function RegistroVenta(props){
                 
             </form>
             
-        <button type="button" className="btn btn-success" onClick ={()=> {setVentas({venta:formulario,user},(e)=> (e.msg)? alert(e.msg): window.location="/ventas?t="+user.token )}} >Agregar</button>
+        <button type="button" className="btn btn-danger" onClick ={()=> {setVentas({venta:formulario,user},(e)=> (e.msg)? alert(e.msg): window.location="/ventas?t="+user.token )}} >Agregar</button>
         </div>
     </div>    
     );

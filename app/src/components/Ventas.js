@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Menu from './Menu';
 import {getVentas,validToken,upDateStatusVenta,searchVenta} from './requestAPI';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
+import fondo from './assest/fondoVino.jpeg';
 
 import {BotonesVentas,SetQuery} from "./BotonesMenu";
 
@@ -53,11 +54,11 @@ function Ventas(props){
 }
 
     return(
-        <div className="Padre">
+        <div className="Padre" style = {{backgroundImage:`url(${fondo})`,backgroundRepeat  : 'no-repeat',backgroundSize: 'cover'}}>
 
-        <Menu botones={BotonesVentas} user={user}/>
-        <div className="container cent py-5">
-            <h1>VENTAS</h1>
+        <Menu botones={BotonesVentas} user={user} colores = "red"/>
+        <div className="container cent ">
+            <h1 style = {{color:"red"}}>Gestión de ventas</h1>
 
             <div className="cent py-5">
                 <div className="container-fluid">
@@ -69,10 +70,10 @@ function Ventas(props){
                     </form>
                 </div>
             </div>
-            <h3>Resultados</h3>
+            <h3 style = {{color:"red"}}>Resultados</h3>
 
-            <div className="cent my-4 curvo">
-                <table className="table table-striped">
+            <div className="cent my-4 curvo pColor1" >
+                <table className="table table-striped" style = {{color:"red"}}>
                     <thead>
                         <tr>
                             <th scope="col">Producto</th>
@@ -89,9 +90,9 @@ function Ventas(props){
                                 
                                 <tr key={i}>
                                     
-                                    <th scope="row">{v.productoID.nombre}</th>
-                                    <td>{v.fecha}</td>
-                                    <td>${v.valor*v.cantidad}</td>
+                                    <th style = {{color:"red"}}scope="row">{v.productoID.nombre}</th>
+                                    <td style = {{color:"red"}}>{v.fecha}</td>
+                                    <td style = {{color:"red"}}>${v.valor*v.cantidad}</td>
                                     <td>
                                     
                                     <select defaultValue = {v.estados}  onChange = {e =>{upDateStatusVenta({user:{...v,estados:e.target.value},admin:user})}}>
@@ -108,10 +109,9 @@ function Ventas(props){
                         }
                         
                     </tbody>
-                </table>
-                
+                </table> 
             </div>
-            <button type="button" className="btn btn-success" onClick ={()=>window.location.href = "/registro-venta?t="+user.token}>Agregar</button>
+            <button type="button" className="btn btn-danger" onClick ={()=>window.location.href = "/registro-venta?t="+user.token}>Agregar</button>
         </div>
     </div>
     

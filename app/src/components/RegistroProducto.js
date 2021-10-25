@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Menu from './Menu';
 import {BotonesRegistroP,SetQuery} from "./BotonesMenu"
 import {validToken, setProductos,getProductos} from './requestAPI';
+import fondo from './assest/fondoVino.jpeg';
 
 
 export default function RegistroProducto(props){
@@ -59,13 +60,13 @@ export default function RegistroProducto(props){
     },[user])
     
     return(
-        <div className="Padre">
+        <div className="Padre" style = {{backgroundImage:`url(${fondo})`,backgroundRepeat  : 'no-repeat',backgroundSize: 'cover'}}>
 
-        <Menu botones={BotonesRegistroP}/>
+        <Menu botones={BotonesRegistroP}  colores = "red" />
         <div className="container cent py-5">
-            <h1>REGISTRO DE PRODUCTOS</h1>
+            <h1 style = {{color:"red"}}>PRODUCTOS</h1>
 
-            <form className="form-plant" onSubmit = {(e)=>e.preventDefault()}>
+            <form className="form-plant pColor1" onSubmit = {(e)=>e.preventDefault()}>
                 <div className="mb-3">
                     <label for="idProducto" className="form-label">Nombre del producto:</label>
                     <input value = {formulario.nombre}  onChange = {e =>upDateFormulario("nombre",e.target.value)} type="text" className="form-control" id="idProducto" aria-describedby="productoHelp"/>
@@ -100,7 +101,7 @@ export default function RegistroProducto(props){
                         
                     </select>
                 </div>
-                <button type="button" className="btn btn-success" onClick ={()=> {setProductos(formulario,(e)=> (e.est === 400)? alert(e.msg): window.location="/modificar-productos?t="+user.token )}} >Agregar</button>
+                <button type="button" className="btn btn-danger" onClick ={()=> {setProductos(formulario,(e)=> (e.est === 400)? alert(e.msg): window.location="/modificar-productos?t="+user.token )}} >Agregar</button>
             </form>
             
         </div>

@@ -3,6 +3,7 @@ import Menu from './Menu';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
 import {getUsers,validToken,upDateStatus,searchUser} from './requestAPI';
 import {BotonesUsers,SetQuery} from './BotonesMenu';
+import fondo from './assest/fondoRojo.jpeg';
 
 function Usuarios(props){
 
@@ -46,10 +47,10 @@ function Usuarios(props){
     
     return(
         
-        <div>
-        <Menu botones={BotonesUsers}/>
+        <div className = "Padre" style = {{backgroundImage:`url(${fondo})`,backgroundRepeat  : 'no-repeat',backgroundSize: 'cover'}}>
+        <Menu botones={BotonesUsers} colores ={"white"}/>
         <div className="container cent py-5">
-        <h1>USUARIOS</h1>
+        <h1 style = {{color:"white"}}>Gestión de usuarios</h1>
         
         <div className="cent py-5">
             <div className="container-fluid">
@@ -61,10 +62,10 @@ function Usuarios(props){
                 </form>
             </div>
         </div>
-        <h3>Resultados</h3>
+        <h3 style = {{color:"white"}}>Resultados</h3>
 
-        <div className="cent my-4 curvo">
-            <table className="table table-striped">
+        <div className="cent my-4 curvo pColor letrasBlancas" >
+            <table className="table table-striped letrasBlancas">
                 <thead>
                     <tr>
                         <th scope="col">Usuario</th>
@@ -72,12 +73,14 @@ function Usuarios(props){
                         <th scope="col">Rol</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody letrasBlancas >
                 {
                         users.map((u,i)=>{
-                        return  ( <tr key={i}>
-                                <th scope="row">{u.name}</th>
-                                <td>{u.date}</td>
+                        return  (
+                                
+                                <tr key={i}>
+                                <th className="letrasBlancas" scope="row">{u.name}</th>
+                                <td className="letrasBlancas">{u.date}</td>
                                 <td>
                                 
                                 <select defaultValue = {u.rol}  onChange = {e =>upDateStatus({user:{...u,rol:e.target.value},admin:user})}>
